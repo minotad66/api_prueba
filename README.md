@@ -1,6 +1,10 @@
 # api_prueba
 Api Rest Pedidos
 
+Clonar el repositorio, luego npm i
+
+Iniciar con npm start
+
 Se utilizan los siguientientes endpoint para las ordenes: /order
 el enponint resive la siguiente estructura:
 {
