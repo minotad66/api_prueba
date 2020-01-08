@@ -38,8 +38,7 @@ async function order( data ) {
 
 async function driver (data) {
   try {
-    const datas = await orderRepository.driver(data)
-    data = datas.filter(item => item.date == data.date)
+    data = await orderRepository.driver(data)
     return { data }
   } catch (err) {
     return console.log(err);

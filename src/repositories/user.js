@@ -20,7 +20,7 @@ async function driverGet() {
   return user;
 }
 
-async function driver() {
+async function driver({ book_id }) {
   const user = await connection.query(
     `SELECT * FROM driver INNER JOIN orders ON driver.id=orders.driver_id;`
   );
