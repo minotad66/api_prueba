@@ -27,14 +27,8 @@ async function order( data ) {
   const driver = response.rows.length ? response.rows : null
   const driver1 = driver.filter(item => item.estate == true)
   data.driver_id = driver1[Math.floor(Math.random() * ((driver1.length+1)-1)+1)].id
-  console.log(Math.floor(Math.random() * ((driver1.length+1)-1)+1));
-  
-  
-  console.log(driver1);
 
-  console.log(data);
-  
-   try {
+  try {
     data = await orderRepository.orderPost(data)
     return { data }
   } catch (err) {
@@ -42,9 +36,9 @@ async function order( data ) {
   } 
 }
 
-async function get_order (data) {
+async function driver (data) {
   try {
-    data = await booksRepository.order_Get(data)
+    data = await orderRepository.driver(data)
     return { data }
   } catch (err) {
     return console.log(err);
@@ -53,5 +47,5 @@ async function get_order (data) {
 
 module.exports = {
   order,
-  get_order
+  driver
 };

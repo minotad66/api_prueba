@@ -33,8 +33,28 @@ async function getOrder(req, res) {
   res.status(200).json(response.rows);
 }
 
+async function driver(req, res) {
+  const { query } = req;
+  console.log(query);
+  
+ /*  
+  let response = {};
+  try {
+    response = await orderService.driver(params);
+    if (response.data.failed) {
+      return res
+        .status(response.data.status)
+        .send({ message: response.data.message });
+    }
+  } catch (err) {
+    next(err);
+  }
+  res.status(200).json(response.data.rows); */
+}
+
 module.exports = {
   order,
   getOrder,
-  home
+  home,
+  driver
 }

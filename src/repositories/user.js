@@ -20,5 +20,12 @@ async function driverGet() {
   return user;
 }
 
+async function driver({ driver_id }) {
+  const user = await connection.query(
+    `SELECT * FROM driver WHERE id=${driver_id}`
+  );
+  return user;
+}
 
-module.exports = { orderPost, orderGet, driverGet };
+
+module.exports = { orderPost, orderGet, driverGet, driver };
