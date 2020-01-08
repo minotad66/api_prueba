@@ -18,3 +18,6 @@ el enponint resive la siguiente estructura:
 }
 
 Todos los datos son requeridos, el correo debe ser unico.
+
+
+Para ver los pedidos que tiene un conductor, se utiliza el endpoint /driver?driver_id='id'&date='fecha_del_pedido'
