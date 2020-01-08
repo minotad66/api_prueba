@@ -5,13 +5,13 @@ const connection = createConnection();
 
 async function orderPost({ name, lastname, email, phone, address, date, time }) {
   const user = await connection.query(
-    `insert into public.order (name, lastname, email, phone, address, date, time) values('${name}', '${lastname}', '${email}', '${phone}', '${address}', '${date}', '${time}')`
+    `insert into orders (name, lastname, email, phone, address, date, time) values('${name}', '${lastname}', '${email}', '${phone}', '${address}', '${date}', '${time}')`
   );
   return user;
 }
 
 async function orderGet() {
-  const user = await connection.query("SELECT * FROM public.order");
+  const user = await connection.query("SELECT * FROM orders");
   return user;
 }
 

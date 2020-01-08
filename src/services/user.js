@@ -16,7 +16,7 @@ async function order( data ) {
     !valid ||
     !validateEmail(data.email) ||
     !validateNumber(data.phone) || 
-    !validateNumber(data.time) ||
+    !validateNumber(data.time) && data.time < 9 && data.time > 1 ||
     !validateTexto(data.name)
   ) {
     return { failed: true, status: 400, message: 'Ha ocurrido un error con los datos, por favor verifiquelos!' }
