@@ -1,0 +1,40 @@
+const orderRepository = require("../repositories/user");
+const {
+  validateData,
+  validateEmail,
+  validateNumber,
+  validateTexto
+} = require('../utils')
+
+async function order({ data }) {
+  const valid = validateData(['name', 'lastname', 'email', 'phone', 'adress', 'date', 'time'], data)
+  if (
+    !valid ||
+    !validateEmail(data.email) ||
+    !validateNumber(data.phone) || 
+    !validateNumber(data.time) ||
+    !validateTexto(data.name)
+  ) {
+    return { failed: true, status: 400, message: 'Ha ocurrido un error con los datos, por favor verifiquelos!' }
+  }
+  try {
+    data = await orderRepository.orderPost(data)
+    return { data }
+  } catch (err) {
+    return console.log(err);
+  }
+}
+
+async function get_order (data) {
+  try {
+    data = await booksRepository.order_Get(data)
+    return { data }
+  } catch (err) {
+    return console.log(err);
+  }
+}
+
+module.exports = {
+  order,
+  get_order
+};
