@@ -6,8 +6,12 @@ const {
   validateTexto
 } = require('../utils')
 
-async function order({ data }) {
-  const valid = validateData(['name', 'lastname', 'email', 'phone', 'adress', 'date', 'time'], data)
+async function order( data ) {
+  console.log(data);
+  
+  const valid = validateData(['name', 'lastname', 'email', 'phone', 'address', 'date', 'time'], data)
+  console.log(valid);
+  
   if (
     !valid ||
     !validateEmail(data.email) ||

@@ -3,18 +3,16 @@
 const createConnection = require("../libs/query");
 const connection = createConnection();
 
-async function orderPost({ title, categories, author, quantity }) {
+async function orderPost({ name, lastname, email, phone, address, date, time }) {
   const user = await connection.query(
-    `insert into order (name, lastname, email, phone, adress, date, time) values('${name}', '${lastname}', '${email}', '${phone}', '${adress}', '${date}', '${time}')`
+    `insert into public.order (name, lastname, email, phone, address, date, time) values('${name}', '${lastname}', '${email}', '${phone}', '${address}', '${date}', '${time}')`
   );
   return user;
 }
 
-async function order_Get({ book_id }) {
-  const user = await connection.query(
-    `SELECT * FROM books WHERE id=${book_id}`
-  );
+async function orderGet() {
+  const user = await connection.query("SELECT * FROM order");
   return user;
 }
 
-module.exports = { orderPost, order_Get };
+module.exports = { orderPost, orderGet };

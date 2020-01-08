@@ -2,9 +2,9 @@
 
 const controller = require('../controllers/user');
 
-function authInit (app) {
+function orders (app) {
   app.post('/order', controller.order)
   app.get('/order', controller.getOrders)
 }
 
-module.exports = authInit
+module.exports = orders

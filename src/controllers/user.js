@@ -1,11 +1,13 @@
-const userService = require('../services/user')
+const orderService = require('../services/user')
+const orderRepository = require("../repositories/user");
 
 async function order(req, res, next) {
   const { body } = req;
+  
   let response = {};
 
   try {
-    response = await booksService.post_Books(body);
+    response = await orderService.order(body);
     if (response.failed) {
       return res.status(response.status).send({ message: response.message });
     }
@@ -18,7 +20,7 @@ async function order(req, res, next) {
 async function getOrders(req, res) {
   let response = {};
   try {
-    response = await contactRepository.orderGet();
+    response = await orderRepository.orderGet();
     if (response.failed) {
       return res.status(response.status).send({ message: response.message });
     }
