@@ -11,7 +11,7 @@ async function orderPost({ name, lastname, email, phone, address, date, time }) 
 }
 
 async function orderGet() {
-  const user = await connection.query("SELECT * FROM order");
+  const user = await connection.query("SELECT * FROM public.order");
   return user;
 }
 

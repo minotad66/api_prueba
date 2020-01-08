@@ -17,7 +17,7 @@ async function order(req, res, next) {
   res.status(200).json(`Su orden se ha creado exitosamente!`);
 }
 
-async function getOrders(req, res) {
+async function getOrder(req, res) {
   let response = {};
   try {
     response = await orderRepository.orderGet();
@@ -25,12 +25,11 @@ async function getOrders(req, res) {
       return res.status(response.status).send({ message: response.message });
     }
   } catch (err) {
-    console.log(err);
   }
   res.status(200).json(response.rows);
 }
 
 module.exports = {
   order,
-  getOrders
+  getOrder
 }
