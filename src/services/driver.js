@@ -1,36 +1,50 @@
-'use strict'
-const driverRepository = require('../repositories/driver')
+const orderRepository = require("../repositories/user");
 
-async function get_driver (data) {
-  try {
-    data = await driverRepository.driver_Get(data)
+const {
+  validateData,
+  validateEmail,
+  validateNumber,
+  validateTexto
+} = require('../utils')
+
+async function order( data ) {
+  console.log(data);
+  
+  const valid = validateData(['name', 'lastname', 'email', 'phone', 'address', 'date', 'hour'], data)
+  console.log(valid);
+  
+  if (
+    !valid ||
+    !validateEmail(data.email) ||
+    !validateNumber(data.phone) || 
+    !validateNumber(data.hour) && data.time < 9 && data.time > 1 ||
+    !validateTexto(data.name)
+  ) {
+    return { failed: true, status: 400, message: 'Ha ocurrido un error con los datos, por favor verifiquelos!' }
+  }
+
+  const response = await orderRepository.driverGet()
+  const driver = response.rows.length ? response.rows : null
+  const driver1 = driver.filter(item => item.estate == true)
+  data.driver_id = driver1[Math.floor(Math.random() * ((driver1.length+1)-1)+1)].id
+  console.log(Math.floor(Math.random() * ((driver1.length+1)-1)+1));
+  
+  
+  console.log(driver1);
+
+  console.log(data);
+  
+   try {
+    data = await orderRepository.orderPost(data)
     return { data }
   } catch (err) {
     return console.log(err);
-  }
+  } 
 }
 
-async function post_driver(data) {
+async function get_order (data) {
   try {
-    data = await driverRepository.driverPost(data)
-    return { data }
-  } catch (err) {
-    return console.log(err);
-  }
-}
-
-async function put_driver(params, body) {
-  try {
-    body = await driverRepository.driverPut(params, body)
-    return body
-  } catch (err) {
-    return console.log(err);
-  }
-}
-
-async function delete_driver(data) {
-  try {
-    data = await driverRepository.driverDelete(data)
+    data = await booksRepository.order_Get(data)
     return { data }
   } catch (err) {
     return console.log(err);
@@ -38,8 +52,6 @@ async function delete_driver(data) {
 }
 
 module.exports = {
-  get_driver,
-  post_driver,
-  put_driver,
-  delete_driver
-}
+  order,
+  get_order
+};

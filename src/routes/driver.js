@@ -1,13 +1,11 @@
-"use strict";
+'use strict';
 
-const controller = require("../controllers/driver");
+const controller = require('../controllers/user');
 
-module.exports = function(app) {
-  app.get("/driver", controller.getdriver);
+function orders (app) {
+  app.post('/orders', controller.order)
+  app.get('/orders', controller.getOrder)
+  app.get('/', controller.home)
+}
 
-  app.post("/driver", controller.postdriver);
-
-  app.put("/driver/:driver_id", controller.putdriver);
-
-  app.delete("/driver/:driver_id", controller.deletedriver);
-};
+module.exports = orders

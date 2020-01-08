@@ -1,5 +1,5 @@
-const orderService = require('../services/order')
-const orderRepository = require("../repositories/order");
+const orderService = require('../services/user')
+const orderRepository = require("../repositories/user");
 
 async function home(req, res, next) {
   res.status(200).json(`Api Rest Order`);

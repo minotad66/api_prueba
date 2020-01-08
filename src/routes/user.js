@@ -1,6 +1,6 @@
 'use strict';
 
-const controller = require('../controllers/order');
+const controller = require('../controllers/user');
 
 function orders (app) {
   app.post('/orders', controller.order)
