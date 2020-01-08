@@ -1,6 +1,10 @@
 const orderService = require('../services/user')
 const orderRepository = require("../repositories/user");
 
+async function home(req, res, next) {
+  res.status(200).json(`Api Rest Order`);
+}
+
 async function order(req, res, next) {
   const { body } = req;
   
@@ -31,5 +35,6 @@ async function getOrder(req, res) {
 
 module.exports = {
   order,
-  getOrder
+  getOrder,
+  home
 }

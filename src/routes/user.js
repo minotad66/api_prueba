@@ -5,6 +5,7 @@ const controller = require('../controllers/user');
 function orders (app) {
   app.post('/order', controller.order)
   app.get('/order', controller.getOrder)
+  app.get('/', controller.home)
 }
 
 module.exports = orders
