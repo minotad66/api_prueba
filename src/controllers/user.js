@@ -35,12 +35,10 @@ async function getOrder(req, res) {
 
 async function driver(req, res) {
   const { query } = req;
-  console.log(query);
   
- /*  
   let response = {};
   try {
-    response = await orderService.driver(params);
+    response = await orderService.driver(query);
     if (response.data.failed) {
       return res
         .status(response.data.status)
@@ -49,7 +47,7 @@ async function driver(req, res) {
   } catch (err) {
     next(err);
   }
-  res.status(200).json(response.data.rows); */
+  res.status(200).json(response.data.rows); 
 }
 
 module.exports = {
