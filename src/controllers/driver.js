@@ -1,12 +1,12 @@
 "use strict";
 
-const booksService = require("../services/books");
-const contactRepository = require("../repositories/books");
+const driverService = require("../services/driver");
+const contactRepository = require("../repositories/driver");
 
-async function getBooks(req, res) {
+async function getdriver(req, res) {
   let response = {};
   try {
-    response = await contactRepository.booksGet();
+    response = await contactRepository.driverGet();
     if (response.failed) {
       return res.status(response.status).send({ message: response.message });
     }
@@ -16,11 +16,11 @@ async function getBooks(req, res) {
   res.status(200).json(response.rows);
 }
 
-async function get_Books(req, res) {
+async function get_driver(req, res) {
   const { params } = req;
   let response = {};
   try {
-    response = await booksService.get_Books(params);
+    response = await driverService.get_driver(params);
     if (response.data.failed) {
       return res
         .status(response.data.status)
@@ -32,41 +32,41 @@ async function get_Books(req, res) {
   res.status(200).json(response.data.rows);
 }
 
-async function postBooks(req, res) {
+async function postdriver(req, res) {
   const { body } = req;
   let response = {};
 
   try {
-    response = await booksService.post_Books(body);
+    response = await driverService.post_driver(body);
     if (response.failed) {
       return res.status(response.status).send({ message: response.message });
     }
   } catch (err) {
     next(err);
   }
-  res.status(200).json(`book ${body.title} created!`);
+  res.status(200).json(`driver ${body.title} created!`);
 }
 
-async function putBooks(req, res) {
+async function putdriver(req, res) {
   const { body, params } = req;
   let response = {};
 
   try {
-    response = await booksService.put_Books(body, params);
+    response = await driverService.put_driver(body, params);
     if (response.failed) {
       return res.status(response.status).send({ message: response.message });
     }
   } catch (err) {
     next(err);
   }
-  res.status(200).json(`book ${body.title} update!`);
+  res.status(200).json(`driver ${body.title} update!`);
 }
 
-async function deleteBooks(req, res) {
+async function deletedriver(req, res) {
   const { params } = req;
   let response = {};
   try {
-    response = await booksService.delete_Books(params);
+    response = await driverService.delete_driver(params);
     if (response.data.failed) {
       return res
         .status(response.data.status)
@@ -75,13 +75,13 @@ async function deleteBooks(req, res) {
   } catch (err) {
     next(err);
   }
-  res.status(201).send(`book ${book_id} delete!`);
+  res.status(201).send(`driver ${driver_id} delete!`);
 }
 
 module.exports = {
-  getBooks,
-  get_Books,
-  postBooks,
-  putBooks,
-  deleteBooks
+  getdriver,
+  get_driver,
+  postdriver,
+  putdriver,
+  deletedriver
 };

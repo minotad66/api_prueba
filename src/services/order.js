@@ -1,4 +1,5 @@
 const orderRepository = require("../repositories/user");
+
 const {
   validateData,
   validateEmail,
@@ -9,24 +10,36 @@ const {
 async function order( data ) {
   console.log(data);
   
-  const valid = validateData(['name', 'lastname', 'email', 'phone', 'address', 'date', 'time'], data)
+  const valid = validateData(['name', 'lastname', 'email', 'phone', 'address', 'date', 'hour'], data)
   console.log(valid);
   
   if (
     !valid ||
     !validateEmail(data.email) ||
     !validateNumber(data.phone) || 
-    !validateNumber(data.time) && data.time < 9 && data.time > 1 ||
+    !validateNumber(data.hour) && data.time < 9 && data.time > 1 ||
     !validateTexto(data.name)
   ) {
     return { failed: true, status: 400, message: 'Ha ocurrido un error con los datos, por favor verifiquelos!' }
   }
-  try {
+
+  const response = await orderRepository.driverGet()
+  const driver = response.rows.length ? response.rows : null
+  const driver1 = driver.filter(item => item.estate == true)
+  data.driver_id = driver1[Math.floor(Math.random() * ((driver1.length+1)-1)+1)].id
+  console.log(Math.floor(Math.random() * ((driver1.length+1)-1)+1));
+  
+  
+  console.log(driver1);
+
+  console.log(data);
+  
+   try {
     data = await orderRepository.orderPost(data)
     return { data }
   } catch (err) {
     return console.log(err);
-  }
+  } 
 }
 
 async function get_order (data) {

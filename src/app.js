@@ -4,8 +4,7 @@ const express = require("express");
 const bodyParse = require("body-parser");
 const cors = require('cors')
 
-const initBooksRouter = require("./routes/books");
-const initUserRouter = require("./routes/user");
+const initOrderRouter = require("./routes/order");
 
 const app = express();
 
@@ -13,8 +12,7 @@ app.use(bodyParse.json());
 app.use(cors())
 
 function initApp() {
-  initBooksRouter(app);
-  initUserRouter(app);
+  initOrderRouter(app);
   return app;
 }
 
